@@ -1,0 +1,5334 @@
+{
+  "annotations": {
+	"list": [
+	  {
+		"builtIn": 1,
+		"datasource": {
+		  "type": "grafana",
+		  "uid": "-- Grafana --"
+		},
+		"enable": true,
+		"hide": true,
+		"iconColor": "rgba(0, 211, 255, 1)",
+		"name": "Annotations & Alerts",
+		"target": {
+		  "limit": 100,
+		  "matchAny": false,
+		  "tags": [],
+		  "type": "dashboard"
+		},
+		"type": "dashboard"
+	  }
+	]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 11,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+	{
+	  "collapsed": false,
+	  "gridPos": {
+		"h": 1,
+		"w": 24,
+		"x": 0,
+		"y": 0
+	  },
+	  "id": 16,
+	  "panels": [],
+	  "title": "Row title",
+	  "type": "row"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "palette-classic"
+		  },
+		  "custom": {
+			"axisBorderShow": false,
+			"axisCenteredZero": true,
+			"axisColorMode": "text",
+			"axisLabel": "",
+			"axisPlacement": "auto",
+			"barAlignment": 0,
+			"drawStyle": "line",
+			"fillOpacity": 0,
+			"gradientMode": "none",
+			"hideFrom": {
+			  "legend": false,
+			  "tooltip": false,
+			  "viz": false
+			},
+			"insertNulls": false,
+			"lineInterpolation": "linear",
+			"lineWidth": 1,
+			"pointSize": 5,
+			"scaleDistribution": {
+			  "type": "linear"
+			},
+			"showPoints": "auto",
+			"spanNulls": false,
+			"stacking": {
+			  "group": "A",
+			  "mode": "none"
+			},
+			"thresholdsStyle": {
+			  "mode": "line"
+			}
+		  },
+		  "decimals": 3,
+		  "mappings": [],
+		  "max": 14000,
+		  "min": -12000,
+		  "thresholds": {
+			"mode": "absolute",
+			"steps": [
+			  {
+				"color": "green",
+				"value": null
+			  },
+			  {
+				"color": "#ffffff",
+				"value": 0
+			  }
+			]
+		  },
+		  "unit": "watt",
+		  "unitScale": true
+		},
+		"overrides": [
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Power Consumption"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "red",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Feed IN Power"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "dark-orange",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Battery SOC"
+			},
+			"properties": [
+			  {
+				"id": "unit",
+				"value": "percent"
+			  },
+			  {
+				"id": "min",
+				"value": 0
+			  },
+			  {
+				"id": "max",
+				"value": 100
+			  },
+			  {
+				"id": "decimals",
+				"value": 0
+			  }
+			]
+		  }
+		]
+	  },
+	  "gridPos": {
+		"h": 33,
+		"w": 12,
+		"x": 0,
+		"y": 1
+	  },
+	  "id": 6,
+	  "options": {
+		"legend": {
+		  "calcs": [
+			"min",
+			"max",
+			"last"
+		  ],
+		  "displayMode": "table",
+		  "placement": "bottom",
+		  "showLegend": true
+		},
+		"timezone": [
+		  ""
+		],
+		"tooltip": {
+		  "mode": "single",
+		  "sort": "none"
+		}
+	  },
+	  "targets": [
+		{
+		  "alias": "Inverter Power",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "A",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "l_power"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": [
+			{
+			  "key": "l_power",
+			  "operator": "<",
+			  "value": "65000"
+			}
+		  ]
+		},
+		{
+		  "alias": "Solar Power",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "B",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "pv_power_total"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "Battery Power",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "C",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "battery_power"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "Feed IN Power",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "D",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "feedin_power"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "Load Power",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "G",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "loadpower"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "Battery SOC",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "E",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "battery_soc"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		}
+	  ],
+	  "title": "Power Consumption",
+	  "type": "timeseries"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "thresholds"
+		  },
+		  "custom": {
+			"neutral": 0
+		  },
+		  "mappings": [],
+		  "max": 12000,
+		  "min": -12000,
+		  "thresholds": {
+			"mode": "absolute",
+			"steps": [
+			  {
+				"color": "dark-red",
+				"value": null
+			  },
+			  {
+				"color": "dark-red",
+				"value": -11000
+			  },
+			  {
+				"color": "red",
+				"value": -10000
+			  },
+			  {
+				"color": "light-red",
+				"value": -9000
+			  },
+			  {
+				"color": "dark-yellow",
+				"value": -8000
+			  },
+			  {
+				"color": "semi-dark-yellow",
+				"value": -6000
+			  },
+			  {
+				"color": "yellow",
+				"value": -4000
+			  },
+			  {
+				"color": "light-yellow",
+				"value": -2000
+			  },
+			  {
+				"color": "super-light-yellow",
+				"value": -1000
+			  },
+			  {
+				"color": "super-light-yellow",
+				"value": 0
+			  },
+			  {
+				"color": "super-light-yellow",
+				"value": 1000
+			  },
+			  {
+				"color": "light-yellow",
+				"value": 2000
+			  },
+			  {
+				"color": "yellow",
+				"value": 4000
+			  },
+			  {
+				"color": "semi-dark-yellow",
+				"value": 6000
+			  },
+			  {
+				"color": "dark-yellow",
+				"value": 8000
+			  },
+			  {
+				"color": "super-light-red",
+				"value": 9000
+			  },
+			  {
+				"color": "light-red",
+				"value": 10000
+			  },
+			  {
+				"color": "dark-red",
+				"value": 11000
+			  }
+			]
+		  },
+		  "unit": "watt",
+		  "unitScale": true
+		},
+		"overrides": [
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "PV Power"
+			},
+			"properties": [
+			  {
+				"id": "min",
+				"value": 0
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Inverter power"
+			},
+			"properties": [
+			  {
+				"id": "min",
+				"value": 0
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Load Power"
+			},
+			"properties": [
+			  {
+				"id": "min",
+				"value": 0
+			  }
+			]
+		  }
+		]
+	  },
+	  "gridPos": {
+		"h": 8,
+		"w": 6,
+		"x": 12,
+		"y": 1
+	  },
+	  "id": 17,
+	  "options": {
+		"minVizHeight": 75,
+		"minVizWidth": 75,
+		"orientation": "auto",
+		"reduceOptions": {
+		  "calcs": [
+			"lastNotNull"
+		  ],
+		  "fields": "",
+		  "values": false
+		},
+		"showThresholdLabels": false,
+		"showThresholdMarkers": true,
+		"sizing": "auto"
+	  },
+	  "pluginVersion": "10.3.1",
+	  "targets": [
+		{
+		  "alias": "Feed IN/OUT",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"null"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "A",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "feedin_power"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "Battery Power",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"null"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "D",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "battery_power"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "Inverter power",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"null"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "B",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "l_power"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "PV Power",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"null"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "C",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "pv_power_total"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "Load Power",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"null"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "E",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "loadpower"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		}
+	  ],
+	  "title": "Power",
+	  "type": "gauge"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "thresholds"
+		  },
+		  "mappings": [],
+		  "max": 100,
+		  "min": 0,
+		  "thresholds": {
+			"mode": "percentage",
+			"steps": [
+			  {
+				"color": "dark-red",
+				"value": null
+			  },
+			  {
+				"color": "red",
+				"value": 10
+			  },
+			  {
+				"color": "orange",
+				"value": 25
+			  },
+			  {
+				"color": "semi-dark-yellow",
+				"value": 50
+			  },
+			  {
+				"color": "light-yellow",
+				"value": 75
+			  },
+			  {
+				"color": "semi-dark-green",
+				"value": 90
+			  },
+			  {
+				"color": "dark-green",
+				"value": 100
+			  }
+			]
+		  },
+		  "unit": "percent",
+		  "unitScale": true
+		},
+		"overrides": []
+	  },
+	  "gridPos": {
+		"h": 8,
+		"w": 2,
+		"x": 18,
+		"y": 1
+	  },
+	  "id": 18,
+	  "options": {
+		"minVizHeight": 75,
+		"minVizWidth": 75,
+		"orientation": "auto",
+		"reduceOptions": {
+		  "calcs": [
+			"lastNotNull"
+		  ],
+		  "fields": "",
+		  "values": false
+		},
+		"showThresholdLabels": true,
+		"showThresholdMarkers": true,
+		"sizing": "auto"
+	  },
+	  "pluginVersion": "10.3.1",
+	  "targets": [
+		{
+		  "alias": "Battery SOC",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"null"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "A",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "battery_soc"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "mean"
+			  }
+			]
+		  ],
+		  "tags": []
+		}
+	  ],
+	  "title": "Battery SOC",
+	  "type": "gauge"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "thresholds"
+		  },
+		  "mappings": [],
+		  "thresholds": {
+			"mode": "absolute",
+			"steps": [
+			  {
+				"color": "green",
+				"value": null
+			  },
+			  {
+				"color": "red",
+				"value": 80
+			  }
+			]
+		  },
+		  "unit": "dthms",
+		  "unitScale": true
+		},
+		"overrides": []
+	  },
+	  "gridPos": {
+		"h": 8,
+		"w": 1,
+		"x": 20,
+		"y": 1
+	  },
+	  "id": 29,
+	  "options": {
+		"colorMode": "none",
+		"graphMode": "none",
+		"justifyMode": "auto",
+		"orientation": "horizontal",
+		"reduceOptions": {
+		  "calcs": [
+			"lastNotNull"
+		  ],
+		  "fields": "",
+		  "values": false
+		},
+		"showPercentChange": false,
+		"textMode": "value_and_name",
+		"wideLayout": true
+	  },
+	  "pluginVersion": "10.3.1",
+	  "targets": [
+		{
+		  "alias": "Untill full",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"null"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "E",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "battery_charge_time"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "Until empty",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"null"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "F",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "battery_discharge_time"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		}
+	  ],
+	  "title": "Batt. Times",
+	  "type": "stat"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "thresholds"
+		  },
+		  "mappings": [],
+		  "max": 70,
+		  "thresholds": {
+			"mode": "absolute",
+			"steps": [
+			  {
+				"color": "green",
+				"value": null
+			  },
+			  {
+				"color": "#EAB839",
+				"value": 40
+			  },
+			  {
+				"color": "red",
+				"value": 45
+			  }
+			]
+		  },
+		  "unit": "celsius",
+		  "unitScale": true
+		},
+		"overrides": [
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Inverter temperature"
+			},
+			"properties": [
+			  {
+				"id": "thresholds",
+				"value": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "green",
+					  "value": null
+					},
+					{
+					  "color": "light-yellow",
+					  "value": 56
+					},
+					{
+					  "color": "orange",
+					  "value": 61
+					},
+					{
+					  "color": "red",
+					  "value": 65
+					}
+				  ]
+				}
+			  }
+			]
+		  }
+		]
+	  },
+	  "gridPos": {
+		"h": 8,
+		"w": 3,
+		"x": 21,
+		"y": 1
+	  },
+	  "id": 10,
+	  "options": {
+		"minVizHeight": 75,
+		"minVizWidth": 75,
+		"orientation": "auto",
+		"reduceOptions": {
+		  "calcs": [
+			"lastNotNull"
+		  ],
+		  "fields": "",
+		  "values": false
+		},
+		"showThresholdLabels": false,
+		"showThresholdMarkers": true,
+		"sizing": "auto"
+	  },
+	  "pluginVersion": "10.3.1",
+	  "targets": [
+		{
+		  "alias": "Battery temperature",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"null"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "A",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "temperature_battery"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "mean"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "Inverter temperature",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"null"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "B",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "temperature_invertor"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "mean"
+			  }
+			]
+		  ],
+		  "tags": []
+		}
+	  ],
+	  "title": "Temperatures",
+	  "type": "gauge"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "palette-classic"
+		  },
+		  "decimals": 2,
+		  "mappings": [],
+		  "min": 0,
+		  "thresholds": {
+			"mode": "absolute",
+			"steps": [
+			  {
+				"color": "green",
+				"value": null
+			  },
+			  {
+				"color": "red",
+				"value": 80
+			  }
+			]
+		  },
+		  "unit": "kwatth",
+		  "unitScale": true
+		},
+		"overrides": [
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Solar energy"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "semi-dark-yellow",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Self-use (Solar + Battery)"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "To grid"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "green",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "From grid"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "dark-red",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  }
+		]
+	  },
+	  "gridPos": {
+		"h": 7,
+		"w": 6,
+		"x": 12,
+		"y": 9
+	  },
+	  "id": 31,
+	  "options": {
+		"displayMode": "gradient",
+		"maxVizHeight": 300,
+		"minVizHeight": 10,
+		"minVizWidth": 0,
+		"namePlacement": "auto",
+		"orientation": "horizontal",
+		"reduceOptions": {
+		  "calcs": [
+			"lastNotNull"
+		  ],
+		  "fields": "",
+		  "values": false
+		},
+		"showUnfilled": false,
+		"sizing": "auto",
+		"valueMode": "color"
+	  },
+	  "pluginVersion": "10.3.1",
+	  "targets": [
+		{
+		  "alias": "Solar energy",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"null"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "E",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "solarenergy_today"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "Self-use (Solar + Battery)",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"null"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "F",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "selfuse_today"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "Battery Charge",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"null"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "A",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "batterycharge_today"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "Battery Discharge",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"null"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "B",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "batterydischarge_today"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "To grid",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"null"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "C",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "feedin_today"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "From grid",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"null"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "D",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "import_today"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		}
+	  ],
+	  "title": "Today",
+	  "type": "bargauge"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "palette-classic"
+		  },
+		  "decimals": 3,
+		  "mappings": [],
+		  "min": 0,
+		  "thresholds": {
+			"mode": "absolute",
+			"steps": [
+			  {
+				"color": "green",
+				"value": null
+			  },
+			  {
+				"color": "red",
+				"value": 80
+			  }
+			]
+		  },
+		  "unit": "kwatth",
+		  "unitScale": true
+		},
+		"overrides": [
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Solar energy"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "semi-dark-yellow",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Self-use (Solar + Battery)"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "To grid"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "green",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "From grid"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "dark-red",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  }
+		]
+	  },
+	  "gridPos": {
+		"h": 7,
+		"w": 6,
+		"x": 18,
+		"y": 9
+	  },
+	  "id": 19,
+	  "options": {
+		"displayMode": "gradient",
+		"maxVizHeight": 300,
+		"minVizHeight": 10,
+		"minVizWidth": 0,
+		"namePlacement": "auto",
+		"orientation": "horizontal",
+		"reduceOptions": {
+		  "calcs": [
+			"lastNotNull"
+		  ],
+		  "fields": "",
+		  "values": false
+		},
+		"showUnfilled": false,
+		"sizing": "auto",
+		"valueMode": "color"
+	  },
+	  "pluginVersion": "10.3.1",
+	  "targets": [
+		{
+		  "alias": "Solar energy",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"null"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "E",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "solarenergy_total"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "Self-use (Solar + Battery)",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"null"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "F",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "selfuse_total"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "Battery Charge",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"null"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "A",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "batterycharge_total"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "Battery Discharge",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"null"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "B",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "batterydischarge_total"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "To grid",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"null"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "C",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "feedin_total"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "From grid",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"null"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "D",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "import_total"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		}
+	  ],
+	  "title": "Total",
+	  "type": "bargauge"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "palette-classic"
+		  },
+		  "custom": {
+			"axisBorderShow": false,
+			"axisCenteredZero": false,
+			"axisColorMode": "text",
+			"axisLabel": "",
+			"axisPlacement": "auto",
+			"barAlignment": 0,
+			"drawStyle": "line",
+			"fillOpacity": 0,
+			"gradientMode": "none",
+			"hideFrom": {
+			  "legend": false,
+			  "tooltip": false,
+			  "viz": false
+			},
+			"insertNulls": false,
+			"lineInterpolation": "linear",
+			"lineWidth": 1,
+			"pointSize": 5,
+			"scaleDistribution": {
+			  "type": "linear"
+			},
+			"showPoints": "auto",
+			"spanNulls": false,
+			"stacking": {
+			  "group": "A",
+			  "mode": "none"
+			},
+			"thresholdsStyle": {
+			  "mode": "off"
+			}
+		  },
+		  "decimals": 1,
+		  "mappings": [],
+		  "min": 0,
+		  "thresholds": {
+			"mode": "absolute",
+			"steps": [
+			  {
+				"color": "green",
+				"value": null
+			  },
+			  {
+				"color": "red",
+				"value": 80
+			  }
+			]
+		  },
+		  "unit": "volt",
+		  "unitScale": true
+		},
+		"overrides": [
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "SolaxPower.last"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "yellow",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "PV1 Voltage"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "yellow",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "PV2 Voltage"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "orange",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  }
+		]
+	  },
+	  "gridPos": {
+		"h": 9,
+		"w": 12,
+		"x": 12,
+		"y": 16
+	  },
+	  "id": 2,
+	  "options": {
+		"legend": {
+		  "calcs": [
+			"min",
+			"max",
+			"last"
+		  ],
+		  "displayMode": "table",
+		  "placement": "bottom",
+		  "showLegend": true
+		},
+		"tooltip": {
+		  "mode": "single",
+		  "sort": "none"
+		}
+	  },
+	  "targets": [
+		{
+		  "alias": "PV1 Voltage",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "A",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "pv1_voltage"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "PV2 Voltage",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "B",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "pv2_voltage"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		}
+	  ],
+	  "title": "PV Voltage",
+	  "type": "timeseries"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "palette-classic"
+		  },
+		  "custom": {
+			"axisBorderShow": false,
+			"axisCenteredZero": false,
+			"axisColorMode": "text",
+			"axisLabel": "",
+			"axisPlacement": "auto",
+			"barAlignment": 0,
+			"drawStyle": "line",
+			"fillOpacity": 0,
+			"gradientMode": "none",
+			"hideFrom": {
+			  "legend": false,
+			  "tooltip": false,
+			  "viz": false
+			},
+			"insertNulls": false,
+			"lineInterpolation": "linear",
+			"lineWidth": 1,
+			"pointSize": 5,
+			"scaleDistribution": {
+			  "type": "linear"
+			},
+			"showPoints": "auto",
+			"spanNulls": false,
+			"stacking": {
+			  "group": "A",
+			  "mode": "none"
+			},
+			"thresholdsStyle": {
+			  "mode": "off"
+			}
+		  },
+		  "decimals": 1,
+		  "mappings": [],
+		  "min": 0,
+		  "thresholds": {
+			"mode": "absolute",
+			"steps": [
+			  {
+				"color": "green",
+				"value": null
+			  },
+			  {
+				"color": "red",
+				"value": 80
+			  }
+			]
+		  },
+		  "unit": "amp",
+		  "unitScale": true
+		},
+		"overrides": [
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "SolaxPower.last"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "yellow",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "PV1 Current"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "yellow",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "PV2 Current"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "orange",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  }
+		]
+	  },
+	  "gridPos": {
+		"h": 9,
+		"w": 12,
+		"x": 12,
+		"y": 25
+	  },
+	  "id": 4,
+	  "options": {
+		"legend": {
+		  "calcs": [
+			"min",
+			"max",
+			"last"
+		  ],
+		  "displayMode": "table",
+		  "placement": "bottom",
+		  "showLegend": true
+		},
+		"tooltip": {
+		  "mode": "single",
+		  "sort": "none"
+		}
+	  },
+	  "targets": [
+		{
+		  "alias": "PV1 Current",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "A",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "pv1_current"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "PV2 Current",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "B",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "pv2_current"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		}
+	  ],
+	  "title": "PV Current",
+	  "type": "timeseries"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "palette-classic"
+		  },
+		  "custom": {
+			"axisBorderShow": false,
+			"axisCenteredZero": true,
+			"axisColorMode": "text",
+			"axisLabel": "",
+			"axisPlacement": "auto",
+			"barAlignment": 0,
+			"drawStyle": "line",
+			"fillOpacity": 0,
+			"gradientMode": "none",
+			"hideFrom": {
+			  "legend": false,
+			  "tooltip": false,
+			  "viz": false
+			},
+			"insertNulls": false,
+			"lineInterpolation": "linear",
+			"lineWidth": 1,
+			"pointSize": 5,
+			"scaleDistribution": {
+			  "type": "linear"
+			},
+			"showPoints": "auto",
+			"spanNulls": false,
+			"stacking": {
+			  "group": "A",
+			  "mode": "none"
+			},
+			"thresholdsStyle": {
+			  "mode": "line"
+			}
+		  },
+		  "decimals": 3,
+		  "mappings": [],
+		  "min": 0,
+		  "thresholds": {
+			"mode": "absolute",
+			"steps": [
+			  {
+				"color": "green",
+				"value": null
+			  }
+			]
+		  },
+		  "unit": "watt",
+		  "unitScale": true
+		},
+		"overrides": [
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Power Consumption"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "red",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Feed IN Power"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "dark-orange",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "PV1 Power"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "yellow",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "PV2 Power"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "orange",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  }
+		]
+	  },
+	  "gridPos": {
+		"h": 9,
+		"w": 24,
+		"x": 0,
+		"y": 34
+	  },
+	  "id": 23,
+	  "options": {
+		"legend": {
+		  "calcs": [
+			"min",
+			"max",
+			"last",
+			"mean"
+		  ],
+		  "displayMode": "table",
+		  "placement": "bottom",
+		  "showLegend": true
+		},
+		"tooltip": {
+		  "mode": "single",
+		  "sort": "none"
+		}
+	  },
+	  "targets": [
+		{
+		  "alias": "PV1 Power",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "A",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "pv1_power"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": [
+			{
+			  "key": "l1_power",
+			  "operator": "<",
+			  "value": "65000"
+			}
+		  ]
+		},
+		{
+		  "alias": "PV2 Power",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "B",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "pv2_power"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": [
+			{
+			  "key": "l2_power",
+			  "operator": "<",
+			  "value": "65000"
+			}
+		  ]
+		}
+	  ],
+	  "title": "PV Power",
+	  "type": "timeseries"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "palette-classic"
+		  },
+		  "custom": {
+			"axisBorderShow": false,
+			"axisCenteredZero": false,
+			"axisColorMode": "text",
+			"axisLabel": "",
+			"axisPlacement": "auto",
+			"barAlignment": 0,
+			"drawStyle": "line",
+			"fillOpacity": 0,
+			"gradientMode": "none",
+			"hideFrom": {
+			  "legend": false,
+			  "tooltip": false,
+			  "viz": false
+			},
+			"insertNulls": false,
+			"lineInterpolation": "linear",
+			"lineWidth": 1,
+			"pointSize": 5,
+			"scaleDistribution": {
+			  "type": "linear"
+			},
+			"showPoints": "auto",
+			"spanNulls": false,
+			"stacking": {
+			  "group": "A",
+			  "mode": "none"
+			},
+			"thresholdsStyle": {
+			  "mode": "off"
+			}
+		  },
+		  "decimals": 1,
+		  "mappings": [],
+		  "thresholds": {
+			"mode": "absolute",
+			"steps": [
+			  {
+				"color": "green",
+				"value": null
+			  },
+			  {
+				"color": "red",
+				"value": 80
+			  }
+			]
+		  },
+		  "unit": "watt",
+		  "unitScale": true
+		},
+		"overrides": []
+	  },
+	  "gridPos": {
+		"h": 10,
+		"w": 12,
+		"x": 0,
+		"y": 43
+	  },
+	  "id": 21,
+	  "options": {
+		"legend": {
+		  "calcs": [
+			"min",
+			"max",
+			"last",
+			"mean"
+		  ],
+		  "displayMode": "list",
+		  "placement": "right",
+		  "showLegend": true
+		},
+		"tooltip": {
+		  "mode": "single",
+		  "sort": "none"
+		}
+	  },
+	  "targets": [
+		{
+		  "alias": "L1 Power",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "B",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "l1_power_offgrid"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "L2 Power",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "A",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "l2_power_offgrid"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "L3 Power",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "C",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "l3_power_offgrid"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		}
+	  ],
+	  "title": "Off Grid Power",
+	  "type": "timeseries"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "palette-classic"
+		  },
+		  "custom": {
+			"axisBorderShow": false,
+			"axisCenteredZero": true,
+			"axisColorMode": "text",
+			"axisLabel": "",
+			"axisPlacement": "auto",
+			"barAlignment": 0,
+			"drawStyle": "line",
+			"fillOpacity": 0,
+			"gradientMode": "none",
+			"hideFrom": {
+			  "legend": false,
+			  "tooltip": false,
+			  "viz": false
+			},
+			"insertNulls": false,
+			"lineInterpolation": "linear",
+			"lineWidth": 1,
+			"pointSize": 5,
+			"scaleDistribution": {
+			  "type": "linear"
+			},
+			"showPoints": "auto",
+			"spanNulls": false,
+			"stacking": {
+			  "group": "A",
+			  "mode": "none"
+			},
+			"thresholdsStyle": {
+			  "mode": "line"
+			}
+		  },
+		  "decimals": 3,
+		  "mappings": [],
+		  "thresholds": {
+			"mode": "absolute",
+			"steps": [
+			  {
+				"color": "green",
+				"value": null
+			  }
+			]
+		  },
+		  "unit": "watt",
+		  "unitScale": true
+		},
+		"overrides": [
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Power Consumption"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "red",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Feed IN Power"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "dark-orange",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  }
+		]
+	  },
+	  "gridPos": {
+		"h": 10,
+		"w": 12,
+		"x": 12,
+		"y": 43
+	  },
+	  "id": 34,
+	  "options": {
+		"legend": {
+		  "calcs": [
+			"min",
+			"max",
+			"last",
+			"mean"
+		  ],
+		  "displayMode": "table",
+		  "placement": "right",
+		  "showLegend": true
+		},
+		"tooltip": {
+		  "mode": "single",
+		  "sort": "none"
+		}
+	  },
+	  "targets": [
+		{
+		  "alias": "L1 Power",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "A",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "l1_power"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": [
+			{
+			  "key": "l1_power",
+			  "operator": "<",
+			  "value": "65000"
+			}
+		  ]
+		},
+		{
+		  "alias": "L2 Power",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "B",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "l2_power"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": [
+			{
+			  "key": "l2_power",
+			  "operator": "<",
+			  "value": "65000"
+			}
+		  ]
+		},
+		{
+		  "alias": "L3 Power",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "C",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "l3_power"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": [
+			{
+			  "key": "l3_power",
+			  "operator": "<",
+			  "value": "65000"
+			}
+		  ]
+		}
+	  ],
+	  "title": "Inverter Power per LINE",
+	  "type": "timeseries"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "palette-classic"
+		  },
+		  "custom": {
+			"axisBorderShow": false,
+			"axisCenteredZero": true,
+			"axisColorMode": "text",
+			"axisLabel": "",
+			"axisPlacement": "auto",
+			"barAlignment": 0,
+			"drawStyle": "line",
+			"fillOpacity": 0,
+			"gradientMode": "none",
+			"hideFrom": {
+			  "legend": false,
+			  "tooltip": false,
+			  "viz": false
+			},
+			"insertNulls": false,
+			"lineInterpolation": "linear",
+			"lineWidth": 1,
+			"pointSize": 5,
+			"scaleDistribution": {
+			  "type": "linear"
+			},
+			"showPoints": "auto",
+			"spanNulls": false,
+			"stacking": {
+			  "group": "A",
+			  "mode": "none"
+			},
+			"thresholdsStyle": {
+			  "mode": "line"
+			}
+		  },
+		  "decimals": 1,
+		  "mappings": [],
+		  "max": 255,
+		  "min": 205,
+		  "thresholds": {
+			"mode": "absolute",
+			"steps": [
+			  {
+				"color": "green",
+				"value": null
+			  }
+			]
+		  },
+		  "unit": "volt",
+		  "unitScale": true
+		},
+		"overrides": [
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Power Consumption"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "red",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Feed IN Power"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "dark-orange",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  }
+		]
+	  },
+	  "gridPos": {
+		"h": 10,
+		"w": 12,
+		"x": 0,
+		"y": 53
+	  },
+	  "id": 33,
+	  "options": {
+		"legend": {
+		  "calcs": [
+			"min",
+			"max",
+			"last",
+			"mean"
+		  ],
+		  "displayMode": "table",
+		  "placement": "right",
+		  "showLegend": true
+		},
+		"tooltip": {
+		  "mode": "single",
+		  "sort": "none"
+		}
+	  },
+	  "targets": [
+		{
+		  "alias": "L1 Voltage",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "A",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "l1_voltage_offgrid"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "L2 Voltage",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "B",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "l2_voltage_offgrid"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "L3 Voltage",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "C",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "l3_voltage_offgrid"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		}
+	  ],
+	  "title": "OffGrid Voltage per LINE",
+	  "type": "timeseries"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "palette-classic"
+		  },
+		  "custom": {
+			"axisBorderShow": false,
+			"axisCenteredZero": true,
+			"axisColorMode": "text",
+			"axisLabel": "",
+			"axisPlacement": "auto",
+			"barAlignment": 0,
+			"drawStyle": "line",
+			"fillOpacity": 0,
+			"gradientMode": "none",
+			"hideFrom": {
+			  "legend": false,
+			  "tooltip": false,
+			  "viz": false
+			},
+			"insertNulls": false,
+			"lineInterpolation": "linear",
+			"lineWidth": 1,
+			"pointSize": 5,
+			"scaleDistribution": {
+			  "type": "linear"
+			},
+			"showPoints": "auto",
+			"spanNulls": false,
+			"stacking": {
+			  "group": "A",
+			  "mode": "none"
+			},
+			"thresholdsStyle": {
+			  "mode": "line"
+			}
+		  },
+		  "decimals": 1,
+		  "mappings": [],
+		  "max": 255,
+		  "min": 205,
+		  "thresholds": {
+			"mode": "absolute",
+			"steps": [
+			  {
+				"color": "green",
+				"value": null
+			  }
+			]
+		  },
+		  "unit": "volt",
+		  "unitScale": true
+		},
+		"overrides": [
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Power Consumption"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "red",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Feed IN Power"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "dark-orange",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  }
+		]
+	  },
+	  "gridPos": {
+		"h": 10,
+		"w": 12,
+		"x": 12,
+		"y": 53
+	  },
+	  "id": 32,
+	  "options": {
+		"legend": {
+		  "calcs": [
+			"min",
+			"max",
+			"last",
+			"mean"
+		  ],
+		  "displayMode": "table",
+		  "placement": "right",
+		  "showLegend": true
+		},
+		"tooltip": {
+		  "mode": "single",
+		  "sort": "none"
+		}
+	  },
+	  "targets": [
+		{
+		  "alias": "L1 Voltage",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "A",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "l1_voltage"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "L2 Voltage",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "B",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "l2_voltage"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "L3 Voltage",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "C",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "l3_voltage"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		}
+	  ],
+	  "title": "Grid Voltage per LINE",
+	  "type": "timeseries"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "palette-classic"
+		  },
+		  "custom": {
+			"axisBorderShow": false,
+			"axisCenteredZero": false,
+			"axisColorMode": "text",
+			"axisLabel": "",
+			"axisPlacement": "auto",
+			"barAlignment": 0,
+			"drawStyle": "line",
+			"fillOpacity": 0,
+			"gradientMode": "none",
+			"hideFrom": {
+			  "legend": false,
+			  "tooltip": false,
+			  "viz": false
+			},
+			"insertNulls": false,
+			"lineInterpolation": "linear",
+			"lineWidth": 1,
+			"pointSize": 5,
+			"scaleDistribution": {
+			  "type": "linear"
+			},
+			"showPoints": "auto",
+			"spanNulls": false,
+			"stacking": {
+			  "group": "A",
+			  "mode": "none"
+			},
+			"thresholdsStyle": {
+			  "mode": "off"
+			}
+		  },
+		  "decimals": 1,
+		  "mappings": [],
+		  "min": 20,
+		  "thresholds": {
+			"mode": "absolute",
+			"steps": [
+			  {
+				"color": "green",
+				"value": null
+			  },
+			  {
+				"color": "red",
+				"value": 80
+			  }
+			]
+		  },
+		  "unit": "celsius",
+		  "unitScale": true
+		},
+		"overrides": [
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Battery"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "blue",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Invertor"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "red",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  }
+		]
+	  },
+	  "gridPos": {
+		"h": 9,
+		"w": 12,
+		"x": 0,
+		"y": 63
+	  },
+	  "id": 22,
+	  "options": {
+		"legend": {
+		  "calcs": [
+			"min",
+			"max"
+		  ],
+		  "displayMode": "list",
+		  "placement": "bottom",
+		  "showLegend": true
+		},
+		"tooltip": {
+		  "mode": "single",
+		  "sort": "none"
+		}
+	  },
+	  "targets": [
+		{
+		  "alias": "Invertor",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "A",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "temperature_invertor"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "Battery",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "B",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "temperature_battery"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		}
+	  ],
+	  "timeFrom": "14d",
+	  "title": "Temperatures",
+	  "type": "timeseries"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "palette-classic"
+		  },
+		  "custom": {
+			"axisBorderShow": false,
+			"axisCenteredZero": false,
+			"axisColorMode": "text",
+			"axisLabel": "",
+			"axisPlacement": "auto",
+			"barAlignment": 0,
+			"drawStyle": "line",
+			"fillOpacity": 0,
+			"gradientMode": "none",
+			"hideFrom": {
+			  "legend": false,
+			  "tooltip": false,
+			  "viz": false
+			},
+			"insertNulls": false,
+			"lineInterpolation": "linear",
+			"lineWidth": 1,
+			"pointSize": 5,
+			"scaleDistribution": {
+			  "type": "linear"
+			},
+			"showPoints": "auto",
+			"spanNulls": false,
+			"stacking": {
+			  "group": "A",
+			  "mode": "none"
+			},
+			"thresholdsStyle": {
+			  "mode": "off"
+			}
+		  },
+		  "decimals": 1,
+		  "mappings": [],
+		  "min": 30,
+		  "thresholds": {
+			"mode": "absolute",
+			"steps": [
+			  {
+				"color": "green",
+				"value": null
+			  },
+			  {
+				"color": "red",
+				"value": 80
+			  }
+			]
+		  },
+		  "unit": "celsius",
+		  "unitScale": true
+		},
+		"overrides": [
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Battery"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "blue",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Invertor"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "red",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  }
+		]
+	  },
+	  "gridPos": {
+		"h": 9,
+		"w": 12,
+		"x": 12,
+		"y": 63
+	  },
+	  "id": 35,
+	  "options": {
+		"legend": {
+		  "calcs": [
+			"min",
+			"max"
+		  ],
+		  "displayMode": "list",
+		  "placement": "bottom",
+		  "showLegend": true
+		},
+		"tooltip": {
+		  "mode": "single",
+		  "sort": "none"
+		}
+	  },
+	  "targets": [
+		{
+		  "alias": "Invertor",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "A",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "temperature_invertor"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "Battery",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "B",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "temperature_battery"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		}
+	  ],
+	  "title": "Temperatures",
+	  "type": "timeseries"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "palette-classic"
+		  },
+		  "custom": {
+			"axisBorderShow": false,
+			"axisCenteredZero": false,
+			"axisColorMode": "text",
+			"axisLabel": "",
+			"axisPlacement": "auto",
+			"barAlignment": 0,
+			"drawStyle": "line",
+			"fillOpacity": 0,
+			"gradientMode": "none",
+			"hideFrom": {
+			  "legend": false,
+			  "tooltip": false,
+			  "viz": false
+			},
+			"insertNulls": false,
+			"lineInterpolation": "linear",
+			"lineWidth": 1,
+			"pointSize": 5,
+			"scaleDistribution": {
+			  "type": "linear"
+			},
+			"showPoints": "auto",
+			"spanNulls": false,
+			"stacking": {
+			  "group": "A",
+			  "mode": "none"
+			},
+			"thresholdsStyle": {
+			  "mode": "off"
+			}
+		  },
+		  "decimals": 1,
+		  "mappings": [],
+		  "max": 100,
+		  "min": 0,
+		  "thresholds": {
+			"mode": "absolute",
+			"steps": [
+			  {
+				"color": "green",
+				"value": null
+			  },
+			  {
+				"color": "red",
+				"value": 80
+			  }
+			]
+		  },
+		  "unit": "percent",
+		  "unitScale": true
+		},
+		"overrides": []
+	  },
+	  "gridPos": {
+		"h": 9,
+		"w": 12,
+		"x": 0,
+		"y": 72
+	  },
+	  "id": 7,
+	  "options": {
+		"legend": {
+		  "calcs": [],
+		  "displayMode": "list",
+		  "placement": "bottom",
+		  "showLegend": true
+		},
+		"tooltip": {
+		  "mode": "single",
+		  "sort": "none"
+		}
+	  },
+	  "targets": [
+		{
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "A",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "battery_soc"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		}
+	  ],
+	  "title": "Battery SOC",
+	  "type": "timeseries"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "palette-classic"
+		  },
+		  "custom": {
+			"axisBorderShow": false,
+			"axisCenteredZero": true,
+			"axisColorMode": "text",
+			"axisLabel": "",
+			"axisPlacement": "auto",
+			"barAlignment": 0,
+			"drawStyle": "line",
+			"fillOpacity": 0,
+			"gradientMode": "none",
+			"hideFrom": {
+			  "legend": false,
+			  "tooltip": false,
+			  "viz": false
+			},
+			"insertNulls": false,
+			"lineInterpolation": "linear",
+			"lineWidth": 1,
+			"pointSize": 5,
+			"scaleDistribution": {
+			  "type": "linear"
+			},
+			"showPoints": "auto",
+			"spanNulls": false,
+			"stacking": {
+			  "group": "A",
+			  "mode": "none"
+			},
+			"thresholdsStyle": {
+			  "mode": "line"
+			}
+		  },
+		  "decimals": 3,
+		  "mappings": [],
+		  "thresholds": {
+			"mode": "absolute",
+			"steps": [
+			  {
+				"color": "green",
+				"value": null
+			  }
+			]
+		  },
+		  "unit": "watt",
+		  "unitScale": true
+		},
+		"overrides": [
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Power Consumption"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "red",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  },
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Feed IN Power"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "dark-orange",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  }
+		]
+	  },
+	  "gridPos": {
+		"h": 9,
+		"w": 12,
+		"x": 12,
+		"y": 72
+	  },
+	  "id": 24,
+	  "options": {
+		"legend": {
+		  "calcs": [
+			"min",
+			"max",
+			"last",
+			"mean"
+		  ],
+		  "displayMode": "table",
+		  "placement": "right",
+		  "showLegend": true
+		},
+		"tooltip": {
+		  "mode": "single",
+		  "sort": "none"
+		}
+	  },
+	  "targets": [
+		{
+		  "alias": "L1 Power",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "A",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "l1_feedin_power"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		},
+		{
+		  "alias": "L2 Power",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "B",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "l2_feedin_power"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ]
+		},
+		{
+		  "alias": "L3 Power",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "C",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "l3_feedin_power"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ]
+		}
+	  ],
+	  "title": "Feed IN Power per LINE",
+	  "type": "timeseries"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "palette-classic"
+		  },
+		  "custom": {
+			"axisBorderShow": false,
+			"axisCenteredZero": false,
+			"axisColorMode": "text",
+			"axisLabel": "",
+			"axisPlacement": "auto",
+			"barAlignment": 0,
+			"drawStyle": "line",
+			"fillOpacity": 0,
+			"gradientMode": "none",
+			"hideFrom": {
+			  "legend": false,
+			  "tooltip": false,
+			  "viz": false
+			},
+			"insertNulls": false,
+			"lineInterpolation": "linear",
+			"lineWidth": 1,
+			"pointSize": 5,
+			"scaleDistribution": {
+			  "type": "linear"
+			},
+			"showPoints": "auto",
+			"spanNulls": false,
+			"stacking": {
+			  "group": "A",
+			  "mode": "none"
+			},
+			"thresholdsStyle": {
+			  "mode": "line"
+			}
+		  },
+		  "decimals": 1,
+		  "mappings": [],
+		  "thresholds": {
+			"mode": "absolute",
+			"steps": [
+			  {
+				"color": "green",
+				"value": null
+			  },
+			  {
+				"color": "red",
+				"value": 0
+			  }
+			]
+		  },
+		  "unitScale": true
+		},
+		"overrides": [
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Battery Power"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "blue",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  }
+		]
+	  },
+	  "gridPos": {
+		"h": 9,
+		"w": 12,
+		"x": 12,
+		"y": 81
+	  },
+	  "id": 8,
+	  "options": {
+		"legend": {
+		  "calcs": [],
+		  "displayMode": "list",
+		  "placement": "bottom",
+		  "showLegend": true
+		},
+		"tooltip": {
+		  "mode": "single",
+		  "sort": "none"
+		}
+	  },
+	  "targets": [
+		{
+		  "alias": "Battery Power",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"$__interval"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "A",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "battery_power"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "last"
+			  }
+			]
+		  ],
+		  "tags": []
+		}
+	  ],
+	  "title": "Battery Power",
+	  "type": "timeseries"
+	},
+	{
+	  "collapsed": false,
+	  "gridPos": {
+		"h": 1,
+		"w": 24,
+		"x": 0,
+		"y": 90
+	  },
+	  "id": 14,
+	  "panels": [],
+	  "title": "Row title",
+	  "type": "row"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "palette-classic"
+		  },
+		  "custom": {
+			"axisBorderShow": false,
+			"axisCenteredZero": false,
+			"axisColorMode": "text",
+			"axisLabel": "",
+			"axisPlacement": "auto",
+			"fillOpacity": 80,
+			"gradientMode": "none",
+			"hideFrom": {
+			  "legend": false,
+			  "tooltip": false,
+			  "viz": false
+			},
+			"lineWidth": 1,
+			"scaleDistribution": {
+			  "type": "linear"
+			},
+			"thresholdsStyle": {
+			  "mode": "off"
+			}
+		  },
+		  "mappings": [],
+		  "thresholds": {
+			"mode": "absolute",
+			"steps": [
+			  {
+				"color": "green",
+				"value": null
+			  },
+			  {
+				"color": "red",
+				"value": 80
+			  }
+			]
+		  },
+		  "unit": "kwatth",
+		  "unitScale": true
+		},
+		"overrides": []
+	  },
+	  "gridPos": {
+		"h": 10,
+		"w": 12,
+		"x": 0,
+		"y": 91
+	  },
+	  "id": 26,
+	  "options": {
+		"barRadius": 0,
+		"barWidth": 0.97,
+		"fullHighlight": false,
+		"groupWidth": 0.7,
+		"legend": {
+		  "calcs": [],
+		  "displayMode": "list",
+		  "placement": "bottom",
+		  "showLegend": true
+		},
+		"orientation": "auto",
+		"showValue": "auto",
+		"stacking": "normal",
+		"tooltip": {
+		  "mode": "single",
+		  "sort": "none"
+		},
+		"xTickLabelRotation": 0,
+		"xTickLabelSpacing": 0
+	  },
+	  "targets": [
+		{
+		  "alias": "Self use",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"1d"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "A",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "selfuse_today"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "max"
+			  }
+			]
+		  ],
+		  "tags": [],
+		  "tz": "Europe/Paris"
+		},
+		{
+		  "alias": "Import",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"1d"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "B",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "import_today"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "max"
+			  }
+			]
+		  ],
+		  "tags": [],
+		  "tz": "Europe/Paris"
+		}
+	  ],
+	  "timeFrom": "7d",
+	  "title": "Consumption - selfuse + import",
+	  "type": "barchart"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "palette-classic"
+		  },
+		  "custom": {
+			"axisBorderShow": false,
+			"axisCenteredZero": false,
+			"axisColorMode": "text",
+			"axisLabel": "",
+			"axisPlacement": "auto",
+			"fillOpacity": 80,
+			"gradientMode": "none",
+			"hideFrom": {
+			  "legend": false,
+			  "tooltip": false,
+			  "viz": false
+			},
+			"lineWidth": 1,
+			"scaleDistribution": {
+			  "type": "linear"
+			},
+			"thresholdsStyle": {
+			  "mode": "off"
+			}
+		  },
+		  "mappings": [],
+		  "thresholds": {
+			"mode": "absolute",
+			"steps": [
+			  {
+				"color": "green",
+				"value": null
+			  },
+			  {
+				"color": "red",
+				"value": 80
+			  }
+			]
+		  },
+		  "unit": "kwatth",
+		  "unitScale": true
+		},
+		"overrides": [
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Discharge"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "red",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  }
+		]
+	  },
+	  "gridPos": {
+		"h": 10,
+		"w": 12,
+		"x": 12,
+		"y": 91
+	  },
+	  "id": 28,
+	  "options": {
+		"barRadius": 0,
+		"barWidth": 0.97,
+		"fullHighlight": false,
+		"groupWidth": 0.7,
+		"legend": {
+		  "calcs": [],
+		  "displayMode": "list",
+		  "placement": "bottom",
+		  "showLegend": true
+		},
+		"orientation": "auto",
+		"showValue": "auto",
+		"stacking": "none",
+		"tooltip": {
+		  "mode": "single",
+		  "sort": "none"
+		},
+		"xTickLabelRotation": 0,
+		"xTickLabelSpacing": 0
+	  },
+	  "targets": [
+		{
+		  "alias": "Charge",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"1d"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "B",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "batterycharge_today"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "max"
+			  }
+			]
+		  ],
+		  "tags": [],
+		  "tz": "Europe/Paris"
+		},
+		{
+		  "alias": "Discharge",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"1d"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "A",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "batterydischarge_today"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "max"
+			  }
+			]
+		  ],
+		  "tags": [],
+		  "tz": "Europe/Paris"
+		}
+	  ],
+	  "timeFrom": "7d",
+	  "title": "Battery",
+	  "type": "barchart"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "palette-classic"
+		  },
+		  "custom": {
+			"axisBorderShow": false,
+			"axisCenteredZero": false,
+			"axisColorMode": "text",
+			"axisLabel": "",
+			"axisPlacement": "auto",
+			"fillOpacity": 80,
+			"gradientMode": "none",
+			"hideFrom": {
+			  "legend": false,
+			  "tooltip": false,
+			  "viz": false
+			},
+			"lineWidth": 1,
+			"scaleDistribution": {
+			  "type": "linear"
+			},
+			"thresholdsStyle": {
+			  "mode": "off"
+			}
+		  },
+		  "mappings": [],
+		  "thresholds": {
+			"mode": "absolute",
+			"steps": [
+			  {
+				"color": "green",
+				"value": null
+			  },
+			  {
+				"color": "red",
+				"value": 80
+			  }
+			]
+		  },
+		  "unit": "kwatth",
+		  "unitScale": true
+		},
+		"overrides": [
+		  {
+			"matcher": {
+			  "id": "byName",
+			  "options": "Import"
+			},
+			"properties": [
+			  {
+				"id": "color",
+				"value": {
+				  "fixedColor": "red",
+				  "mode": "fixed"
+				}
+			  }
+			]
+		  }
+		]
+	  },
+	  "gridPos": {
+		"h": 10,
+		"w": 12,
+		"x": 0,
+		"y": 101
+	  },
+	  "id": 27,
+	  "options": {
+		"barRadius": 0,
+		"barWidth": 0.97,
+		"fullHighlight": false,
+		"groupWidth": 0.7,
+		"legend": {
+		  "calcs": [],
+		  "displayMode": "list",
+		  "placement": "bottom",
+		  "showLegend": true
+		},
+		"orientation": "auto",
+		"showValue": "auto",
+		"stacking": "none",
+		"tooltip": {
+		  "mode": "single",
+		  "sort": "none"
+		},
+		"xTickLabelRotation": 0,
+		"xTickLabelSpacing": 0
+	  },
+	  "targets": [
+		{
+		  "alias": "Export",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"1d"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "B",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "feedin_today"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "max"
+			  }
+			]
+		  ],
+		  "tags": [],
+		  "tz": "Europe/Paris"
+		},
+		{
+		  "alias": "Import",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"1d"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "A",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "import_today"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "max"
+			  }
+			]
+		  ],
+		  "tags": [],
+		  "tz": "Europe/Paris"
+		}
+	  ],
+	  "timeFrom": "7d",
+	  "title": "Export",
+	  "type": "barchart"
+	},
+	{
+	  "datasource": {
+		"type": "influxdb",
+		"uid": "000000001"
+	  },
+	  "fieldConfig": {
+		"defaults": {
+		  "color": {
+			"mode": "palette-classic"
+		  },
+		  "custom": {
+			"axisBorderShow": false,
+			"axisCenteredZero": false,
+			"axisColorMode": "text",
+			"axisLabel": "",
+			"axisPlacement": "auto",
+			"fillOpacity": 80,
+			"gradientMode": "none",
+			"hideFrom": {
+			  "legend": false,
+			  "tooltip": false,
+			  "viz": false
+			},
+			"lineWidth": 1,
+			"scaleDistribution": {
+			  "type": "linear"
+			},
+			"thresholdsStyle": {
+			  "mode": "off"
+			}
+		  },
+		  "mappings": [],
+		  "thresholds": {
+			"mode": "absolute",
+			"steps": [
+			  {
+				"color": "green",
+				"value": null
+			  },
+			  {
+				"color": "red",
+				"value": 80
+			  }
+			]
+		  },
+		  "unit": "percent",
+		  "unitScale": true
+		},
+		"overrides": []
+	  },
+	  "gridPos": {
+		"h": 10,
+		"w": 12,
+		"x": 12,
+		"y": 101
+	  },
+	  "id": 30,
+	  "options": {
+		"barRadius": 0,
+		"barWidth": 0.97,
+		"fullHighlight": false,
+		"groupWidth": 0.7,
+		"legend": {
+		  "calcs": [],
+		  "displayMode": "list",
+		  "placement": "bottom",
+		  "showLegend": true
+		},
+		"orientation": "auto",
+		"showValue": "always",
+		"stacking": "none",
+		"tooltip": {
+		  "mode": "single",
+		  "sort": "none"
+		},
+		"xField": "Time",
+		"xTickLabelRotation": 0,
+		"xTickLabelSpacing": 0
+	  },
+	  "targets": [
+		{
+		  "alias": "Battery SOC (MAX)",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"1d"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "A",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "battery_soc"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "max"
+			  }
+			]
+		  ],
+		  "tags": [],
+		  "tz": "Europe/Paris"
+		},
+		{
+		  "alias": "Battery SOC (MIN)",
+		  "datasource": {
+			"type": "influxdb",
+			"uid": "000000001"
+		  },
+		  "groupBy": [
+			{
+			  "params": [
+				"1d"
+			  ],
+			  "type": "time"
+			},
+			{
+			  "params": [
+				"none"
+			  ],
+			  "type": "fill"
+			}
+		  ],
+		  "hide": false,
+		  "measurement": "SolaxPower",
+		  "orderByTime": "ASC",
+		  "policy": "default",
+		  "refId": "B",
+		  "resultFormat": "time_series",
+		  "select": [
+			[
+			  {
+				"params": [
+				  "battery_soc"
+				],
+				"type": "field"
+			  },
+			  {
+				"params": [],
+				"type": "min"
+			  }
+			]
+		  ],
+		  "tags": [],
+		  "tz": "Europe/Paris"
+		}
+	  ],
+	  "timeFrom": "7d",
+	  "title": "Battery SOC",
+	  "type": "barchart"
+	}
+  ],
+  "refresh": "5s",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+	"list": []
+  },
+  "time": {
+	"from": "now-2d",
+	"to": "now"
+  },
+  "timepicker": {
+	"refresh_intervals": [
+	  "5s",
+	  "10s",
+	  "30s",
+	  "1m",
+	  "5m",
+	  "15m",
+	  "30m",
+	  "1h",
+	  "2h",
+	  "1d"
+	]
+  },
+  "timezone": "",
+  "title": "PV Plant",
+  "uid": "WQtQsJiSk",
+  "version": 105,
+  "weekStart": ""
+}
